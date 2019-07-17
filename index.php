@@ -18,10 +18,14 @@ echo('<pre>');
 
 use AutoOrganizze\Model\Dao\AccountDao;
 
+echo("List:\n");
 $query = AccountDao::getInstance()->list();
 var_dump($query);
 foreach($query as $row) {
     print_r($row);
 }
+echo("Single:\n");
+$account = AccountDao::getInstance()->get(1);
+print_r($account);
 
 echo('</pre>');
