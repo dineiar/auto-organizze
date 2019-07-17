@@ -1,4 +1,4 @@
-# auto_organizze
+# auto-organizze
 POC for automating some tasks in Organizze
 
 ## This is NOT FOR PRODUCTION.
