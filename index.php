@@ -10,15 +10,23 @@ spl_autoload_register(function ($name) {
         for($i = 0; $i < count($names)-1; $i++) {
             $names[$i] = strtolower($names[$i]);
         }
-        include implode('/', $names) . '.php';
+        $file = implode('/', $names) . '.php';
+        if (is_file($file)) {
+            include $file;
+        } else {
+            throw new POCFW\Exception\ClassNotFoundException('Class ' . $name . ' not found for autoload');
+        }
     }
 });
 
-$superSecretKey = 'Senha123';
+$router = new POCFW\Controller\Router;
+$router->invokeController();
 
-use POCFW\Util\Security;
-use AutoOrganizze\Model\Dao\AccountDao;
-use AutoOrganizze\Model\Entity\Account;
+// $superSecretKey = 'Senha123';
+
+// use POCFW\Util\Security;
+// use AutoOrganizze\Model\Dao\AccountDao;
+// use AutoOrganizze\Model\Entity\Account;
 
 // echo("List:\n");
 // $query = AccountDao::getInstance()->list();
@@ -30,7 +38,15 @@ use AutoOrganizze\Model\Entity\Account;
 // echo("Get single:\n");
 // $account = AccountDao::getInstance()->get(1);
 // var_dump($account);
-// var_dump('Check account password:', Security::checkPassword($account->password, $superSecretKey));
+
+// $account->api_key = Security::encrypt($account->api_key, $superSecretKey);
+// $num = AccountDao::getInstance()->update($account);
+// var_dump($num);
+// var_dump('Updated '.$num.' account');
+
+// var_dump('Encrypted API key:', $account->api_key);
+
+// var_dump('Decrypted API key:', Security::decrypt($account->api_key, $superSecretKey));
 
 // $hashedPw = Security::hashPassword($superSecretKey);
 // var_dump($hashedPw, Security::checkPassword($hashedPw, $superSecretKey));
@@ -47,4 +63,4 @@ use AutoOrganizze\Model\Entity\Account;
 
 // echo("Delete:\n");
 // $num = AccountDao::getInstance()->delete($accountId);
-// var_dump('Removed '.$num.' accounts');
+// var_dump('Removed '.$num.' account');

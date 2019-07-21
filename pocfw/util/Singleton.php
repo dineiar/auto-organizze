@@ -10,6 +10,10 @@ abstract class Singleton {
 
     protected function __construct() { }
 
+    /**
+     * Gets the singleton instance
+     * @return $this
+     */
     final public static function getInstance() {
         static $aoInstance = array();
 

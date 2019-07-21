@@ -1,0 +1,14 @@
+# <IfModule mod_headers.c>
+#     Header set Access-Control-Allow-Origin "*"
+# </IfModule>
+
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    # RedirectMatch /data/private/.* /404 [L]
+    # RewriteBase /
+    # RewriteRule private/.* index.php?p=404 [L]
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule (.*) index.php [L]
+</IfModule>
