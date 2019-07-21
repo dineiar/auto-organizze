@@ -1,5 +1,4 @@
 <?php
-
 namespace POCFW\Util;
 
 /**
